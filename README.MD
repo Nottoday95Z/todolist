@@ -4,6 +4,6 @@ Python 3.10, Django 4.0.1, Postgres, Docker
 
 Запуск : Из директории запустить -docker-compose up Заполнить .env в соответсвии с .env_example Сделать миграции Запустить проект
 
-https://github.com/Nottoday95Z/todolist-main
+https://github.com/Nottoday95Z/todolist2
 
 Zhukov G. A

@@ -13,7 +13,7 @@ services:
      build:
        context: .
        dockerfile: Dockerfile
-     image: nottoday95z/todolist
+     image: nottoday95z/todolist2
      restart: always
      env_file:
        - .env_docker
@@ -26,7 +26,7 @@ services:
        - "8000:8000"
   migrations:
     build: .
-    image: nottoday95z/todolist
+    image: nottoday95z/todolist2
     depends_on:
       db:
         condition: service_healthy
