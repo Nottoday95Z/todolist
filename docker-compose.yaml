@@ -1,59 +1,55 @@
 version: '3.9'
 
-
 services:
-  frontend:
+  front:
     image: sermalenk/skypro-front:lesson-37
-    restart: always
+    ports:
+    - 80:80
     depends_on:
       - api
-    ports:
-      - "80:80"
   api:
-     build:
-       context: .
-       dockerfile: Dockerfile
-     image: nottoday95z/todolist2
-     restart: always
-     env_file:
-       - .env_docker
-     depends_on:
-      db:
-         condition: service_healthy
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
       migrations:
         condition: service_completed_successfully
-     ports:
-       - "8000:8000"
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env_docker
+
   migrations:
-    build: .
-    image: nottoday95z/todolist2
+    build:
+      context: .
     depends_on:
-      db:
+      postgres:
         condition: service_healthy
     env_file:
       - .env_docker
     command: >
-      bash -c 'python3 manage.py makemigrations && python3 manage.py migrate'
-      
-
-  db:
-    image: postgres:latest
+      bash -c 'python3 manage.py migrate'
+  postgres:
+    image: postgres:15.1-alpine
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-    restart: always
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_DB: $POSTGRES_DB
     env_file:
       - .env_docker
     ports:
-      - 5432:5432
-    volumes:
-      - ./pg_data:/var/lib/postgresql/data
+      - "5432:5432"
+    restart: always
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
       interval: 5s
       timeout: 5s
       retries: 5
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
 
 
 volumes:
