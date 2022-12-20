@@ -20,8 +20,7 @@ services:
     ports:
       - "8000:8000"
     env_file:
-      - .env_docker
-
+      - .env
   migrations:
     build:
       context: .
@@ -29,7 +28,7 @@ services:
       postgres:
         condition: service_healthy
     env_file:
-      - .env_docker
+      - .env
     command: >
       bash -c 'python3 manage.py migrate'
   postgres:
@@ -39,7 +38,7 @@ services:
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
       POSTGRES_DB: $POSTGRES_DB
     env_file:
-      - .env_docker
+      - .env
     ports:
       - "5432:5432"
     restart: always
