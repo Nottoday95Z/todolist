@@ -7,11 +7,11 @@ jobs:
       - name: clone code
         uses: actions/checkout@v2
       - name: docker build
-        run: docker build -t nottoday95z/todolist:$GITHUB_REF_NAME-$GITHUB_RUN_ID .
+        run: docker build -t nottoday95z/todolist2:$GITHUB_REF_NAME-$GITHUB_RUN_ID .
       - name: docker login
         run: echo ${{ secrets.DOCKER_TOKEN}} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
       - name: docker push
-        run: docker push nottoday95z/todolist:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+        run: docker push nottoday95z/todolist2:$GITHUB_REF_NAME-$GITHUB_RUN_ID
 
   deploy:
     runs-on: ubuntu-latest
@@ -38,7 +38,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           source: "deploy/docker-compose.yaml"
-          target: "todolist"
+          target: "todolist2"
           strip_components: 1
       - name: deploy app
         uses: appleboy/ssh-action@master
