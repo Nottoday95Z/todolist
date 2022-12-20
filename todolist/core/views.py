@@ -45,4 +45,3 @@ class UpdatePasswordView(generics.UpdateAPIView):
         return self.request.user
 
 
-
