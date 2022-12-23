@@ -9,7 +9,7 @@ services:
     ports:
       - "80:80"
   api:
-    image: nottoday95z/todolist2:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+    image: nottoday95z/todolist:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     restart: always
     environment:
       POSTGRES_HOST: ${POSTGRES_HOST}
