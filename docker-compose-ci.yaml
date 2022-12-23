@@ -9,7 +9,7 @@ services:
     ports:
       - "80:80"
   api:
-    image: nottoday95z/todolist2:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+    image: nottoday95z/todolist:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     restart: always
     environment:
       POSTGRES_HOST: ${POSTGRES_HOST}
@@ -30,7 +30,7 @@ services:
       - "8000:8000"
 
   migrations:
-    image: nottoday95z/todolist2:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+    image: nottoday95z/todolist:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     environment:
       POSTGRES_HOST: ${POSTGRES_HOST}
       POSTGRES_USER: ${POSTGRES_USER}
@@ -40,15 +40,15 @@ services:
       POSTGRES_PORT: ${POSTGRES_PORT}
       SOCIAL_AUTH_VK_OAUTH2_KEY: ${SOCIAL_AUTH_VK_OAUTH2_KEY}
       SOCIAL_AUTH_VK_OAUTH2_SECRET: ${SOCIAL_AUTH_VK_OAUTH2_SECRET}
+
       DEBUG: False
     depends_on:
       db:
         condition: service_healthy
-    command: >
-      bash -c 'python3 manage.py makemigrations && python3 manage.py migrate'
+    command: python manage.py migrate
 
   db:
-    image: postgres:latest
+    image: postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
