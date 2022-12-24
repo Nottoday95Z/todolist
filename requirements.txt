@@ -5,3 +5,4 @@ djangorestframework==3.14.0
 django-cors-headers==3.13.0
 social-auth-app-django==5.0.0
 django-filter==22.1
+whitenoise-6.2.0
