@@ -28,8 +28,8 @@ environ.Env.read_env(ENV_FILE_PATH)
 SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = env.bool('DEBUG', default=False)
-DEBUG=True
+# DEBUG = env.bool('DEBUG', default=False)
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -140,7 +140,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-
 AUTHENTICATION_BACKENDS = (
     "social_core.backends.vk.VKOAuth2",
     "django.contrib.auth.backends.ModelBackend",
@@ -155,11 +154,9 @@ SOCIAL_AUTH_LOGIN_ERROR_URL = "/login-error/"
 SOCIAL_AUTH_URL_NAMESPACE = "social"
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ["email"]
 
-
 AUTH_USER_MODEL = 'core.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
-
