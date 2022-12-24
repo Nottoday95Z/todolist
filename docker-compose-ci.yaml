@@ -32,7 +32,7 @@ services:
       postgres:
         condition: service_healthy
     command: >
-      bash -c 'python manage.py migrate'
+      bash -c 'python3 manage.py makemigrations && python3 manage.py migrate'
     environment:
       DEBUG: False
       POSTGRES_HOST: $POSTGRES_HOST
