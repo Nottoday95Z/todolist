@@ -9,7 +9,7 @@ services:
     ports:
       - "80:80"
   api:
-    image: nottoday95z/todolist2:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+    image: nottoday95z/todolist:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     depends_on:
       postgres:
         condition: service_healthy
@@ -27,7 +27,7 @@ services:
       SOCIAL_AUTH_VK_OAUTH2_SECRET: $SOCIAL_AUTH_VK_OAUTH2_SECRET
 
   migrations:
-    image: nottoday95z/todolist2:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+    image: nottoday95z/todolist:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     depends_on:
       postgres:
         condition: service_healthy
