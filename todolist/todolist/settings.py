@@ -28,8 +28,8 @@ environ.Env.read_env(ENV_FILE_PATH)
 SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = env.bool('DEBUG', default=False)
-DEBUG = True
+DEBUG = env.bool('DEBUG', default=False)
+#DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -153,7 +153,7 @@ SOCIAL_AUTH_VK_OAUTH2_SECRET = env.str('SOCIAL_AUTH_VK_OAUTH2_SECRET')
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/logged-in/"
 SOCIAL_AUTH_LOGIN_ERROR_URL = "/login-error/"
 SOCIAL_AUTH_URL_NAMESPACE = "social"
-SOCIAL_AUTH_VK_OAUTH2_SCOPE = ["email"]
+#SOCIAL_AUTH_VK_OAUTH2_SCOPE = ["email"]
 
 AUTH_USER_MODEL = 'core.User'
 
