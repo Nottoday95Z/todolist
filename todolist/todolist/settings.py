@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-from pathlib import Path
 import environ
 import os
 
@@ -19,9 +18,7 @@ env = environ.Env(
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-ENV_FILE_PATH = BASE_DIR.parent.joinpath('.env')
-
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
@@ -50,6 +47,7 @@ INSTALLED_APPS = [
     'social_django',
     'goals',
     'django_filters',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -61,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "social_django.middleware.SocialAuthExceptionMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 ROOT_URLCONF = 'todolist.urls'
 
@@ -144,13 +144,12 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
-
 SOCIAL_AUTH_VK_OAUTH2_KEY = env.str('SOCIAL_AUTH_VK_OAUTH2_KEY')
 SOCIAL_AUTH_VK_OAUTH2_SECRET = env.str('SOCIAL_AUTH_VK_OAUTH2_SECRET')
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/logged-in/"
 SOCIAL_AUTH_LOGIN_ERROR_URL = "/login-error/"
 SOCIAL_AUTH_URL_NAMESPACE = "social"
-SOCIAL_AUTH_VK_OAUTH2_SCOPE = ["email"]
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ["email", "notify"]
 
 AUTH_USER_MODEL = 'core.User'
 
@@ -159,4 +158,4 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
