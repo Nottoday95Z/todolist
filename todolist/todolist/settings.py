@@ -28,8 +28,8 @@ environ.Env.read_env(ENV_FILE_PATH)
 SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = env.bool('DEBUG', default=False)
-DEBUG = True
+DEBUG = env.bool('DEBUG', default=False)
+#DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -59,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
