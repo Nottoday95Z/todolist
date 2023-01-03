@@ -96,7 +96,7 @@ class Command(BaseCommand):
     def update_tg_user_verification_code(self, message, tg_client, verification_code) -> None:
         tg_user: Optional[TgUser] = TgUser.objects.filter(tg_user_id=message.msg_from.id)
         if tg_user:
-            tg_user.objects.update(
+            tg_user.update(
                 verification_code=verification_code
             )
             tg_client.send_message(chat_id=message.chat.id,
