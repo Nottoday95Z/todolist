@@ -98,7 +98,7 @@ DATABASES = {
         'USER': env.str('POSTGRES_USER'),
         'PASSWORD': env.str('POSTGRES_PASSWORD'),
         'HOST': env.str('POSTGRES_HOST', default='localhost'),
-        'PORT': 5432
+        'PORT': '5432'
     }
 }
 
@@ -165,4 +165,4 @@ REST_FRAMEWORK = {
 }
 
 
-BOT_TOKEN = env.str("BOT_TOKEN")
+BOT_TOKEN = env.str('BOT_TOKEN')
