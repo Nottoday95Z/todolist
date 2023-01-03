@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'social_django',
     'goals',
     'django_filters',
+    'bot'
 ]
 
 MIDDLEWARE = [
@@ -59,13 +60,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'social_django.middleware.SocialAuthExceptionMiddleware',
 
     'corsheaders.middleware.CorsMiddleware',
-    # 'django.middleware.common.CommonMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
-
 ]
+
+
 ROOT_URLCONF = 'todolist.urls'
 
 TEMPLATES = [
@@ -97,8 +97,8 @@ DATABASES = {
         'NAME': env.str('POSTGRES_DB'),
         'USER': env.str('POSTGRES_USER'),
         'PASSWORD': env.str('POSTGRES_PASSWORD'),
-        'HOST': env.str('POSTGRES_HOST', default='127.0.0.1'),
-        'PORT': '5432',
+        'HOST': env.str('POSTGRES_HOST', default='localhost'),
+        'PORT': env.str('POSTGRES_PORT')
     }
 }
 
@@ -163,3 +163,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
+
+
+BOT_TOKEN = env.str("BOT_TOKEN")
